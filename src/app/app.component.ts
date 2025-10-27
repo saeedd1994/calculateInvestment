@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {HeaderComponent} from "./header/header.component";
 import {UserInputComponent} from "./user-input/user-input.component";
 import {InvestmentDataInterface} from "./models/investData.interface";
+import {InvestmentResultsComponent} from "./investment-results/investment-results.component";
+import {GridResultModelInterface} from "./models/grid-result-model.interface";
 
 @Component({
   selector: 'app-root',
@@ -9,10 +11,12 @@ import {InvestmentDataInterface} from "./models/investData.interface";
   templateUrl: './app.component.html',
   imports: [
     HeaderComponent,
-    UserInputComponent
+    UserInputComponent,
+    InvestmentResultsComponent
   ]
 })
 export class AppComponent {
+  gridResult?:GridResultModelInterface[];
 
   calculateInvestmentResults(data: InvestmentDataInterface) {
     const {initialInvestment, annualInvestment, expectedReturn, duration} = data
@@ -36,7 +40,7 @@ export class AppComponent {
     }
 
     console.log('annualData', annualData);
-    return annualData;
+    this.gridResult = annualData;
   }
 
 }
